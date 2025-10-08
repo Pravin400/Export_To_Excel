@@ -48,4 +48,10 @@ public ResponseEntity<Courses> saveCourses(@RequestBody Courses courses) {
     public List<Courses> getCourses()  {
         return courseService.getAllCourses();
     }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Courses> updateCourse(@PathVariable Integer id, @RequestBody Courses courses) {
+        Courses updatedCourses = courseService.updateCourses(id,courses);
+        return ResponseEntity.ok(updatedCourses);
+    }
 }

@@ -56,9 +56,26 @@ public class CouserService {
     public List<Courses> getAllCourses() {
         return courseRepository.findAll();
     }
+//
+//    public String  deleteCourses(Integer id) {
+//        courseRepository.deleteById(id);
+//        String str = "Courses Deleted Successfully!"+"{id}";
+//        return str;
+//    }
 
-    public void deleteCourses(Integer id) {
+    public String deleteCourses(Integer id) {
+
+        Courses course = courseRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Course not found with ID: " + id));
+
         courseRepository.deleteById(id);
+
+        return "Course '" + course.getCourseName() + "' deleted successfully!";
+    }
+
+
+    public Courses updateCourses(Integer id, Courses courses) {
+        return courseRepository.save(courses);
     }
 
 }
